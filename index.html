@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>🌿 Science 4.º Primaria · Tema 2: La Vida de las Plantas | Entrenador de Olivia</title>
+  <meta name="description" content="Aplicación interactiva y pedagógica para preparar el examen del Tema 2 de Science / Conocimiento del Medio de 4º de primaria. Proyecto CLAVES Grazalema-Santillana.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
+
+  <!-- Tipografías Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Hojas de estilo locales -->
+  <link rel="stylesheet" href="css/tailwind.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Canvas Confetti local -->
+  <script src="js/confetti.min.js"></script>
+</head>
+<body class="flex flex-col min-h-screen text-slate-800 antialiased selection:bg-emerald-200">
+
+  <!-- =========================================================================
+       CABECERA PRINCIPAL (NAVBAR)
+       ========================================================================= -->
+  <header class="no-print sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+      
+      <!-- Logo y Marca -->
+      <div class="flex items-center gap-3 cursor-pointer" onclick="app.navigate('home')">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-600 flex items-center justify-center text-2xl shadow-md text-white">
+          🌿
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-lg font-black font-display tracking-tight text-slate-900 leading-none">Science 4.º</h1>
+            <span class="bg-emerald-100 text-emerald-800 text-xs px-2 py-0.5 rounded-full font-extrabold">TEMA 2</span>
+          </div>
+          <p class="text-xs text-slate-500 font-semibold">Las Plantas · Entrenador de Olivia · Santillana CLAVES</p>
+        </div>
+      </div>
+
+      <!-- Navegación de Escritorio -->
+      <nav class="hidden md:flex items-center gap-1 text-sm font-bold text-slate-600">
+        <button onclick="app.navigate('home')" id="nav-home" class="px-3 py-1.5 rounded-xl hover:text-emerald-700 hover:bg-emerald-50 transition-colors">🏠 Inicio</button>
+        <button onclick="app.navigate('misiones')" id="nav-misiones" class="px-3 py-1.5 rounded-xl hover:text-emerald-700 hover:bg-emerald-50 transition-colors">🌱 Misiones</button>
+        <button onclick="app.navigate('examen')" id="nav-examen" class="px-3 py-1.5 rounded-xl hover:text-emerald-700 hover:bg-emerald-50 transition-colors">🏆 Examen Oficial</button>
+        <button onclick="app.navigate('express')" id="nav-express" class="px-3 py-1.5 rounded-xl hover:text-emerald-700 hover:bg-emerald-50 transition-colors">⚡ Express</button>
+        <button onclick="app.navigate('arcade')" id="nav-arcade" class="px-3 py-1.5 rounded-xl hover:text-emerald-700 hover:bg-emerald-50 transition-colors">🕹️ Arcade</button>
+        <button onclick="app.navigate('laboratorio')" id="nav-laboratorio" class="px-3 py-1.5 rounded-xl hover:text-emerald-700 hover:bg-emerald-50 transition-colors">🔬 Explorador</button>
+        <button onclick="app.navigate('chuleta')" id="nav-chuleta" class="px-3 py-1.5 rounded-xl hover:text-emerald-700 hover:bg-emerald-50 transition-colors">📖 Chuleta</button>
+      </nav>
+
+      <!-- Controles de Audio, Estrellas y Perfil -->
+      <div class="flex items-center gap-2">
+        <!-- Contador de Estrellas -->
+        <div class="flex items-center gap-1.5 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full text-amber-700 font-black text-sm shadow-xs">
+          <span class="text-base">⭐</span>
+          <span id="star-count">0</span>
+        </div>
+
+        <!-- Botón Voz Lectora -->
+        <button onclick="app.toggleVoice()" id="btn-voice" class="w-9 h-9 rounded-xl border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-100 transition-colors" title="Activar/Desactivar lectura en voz alta">
+          🗣️
+        </button>
+
+        <!-- Botón Sonidos -->
+        <button onclick="app.toggleSound()" id="btn-sound" class="w-9 h-9 rounded-xl border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-100 transition-colors" title="Activar/Desactivar efectos de sonido">
+          🔊
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Barra de Navegación Móvil Inferior -->
+    <div class="md:hidden flex overflow-x-auto gap-2 px-4 py-2 border-t border-slate-100 bg-slate-50/90 text-xs font-bold scrollbar-none">
+      <button onclick="app.navigate('home')" class="whitespace-nowrap px-3 py-1 rounded-lg bg-white border border-slate-200 shadow-xs">🏠 Inicio</button>
+      <button onclick="app.navigate('misiones')" class="whitespace-nowrap px-3 py-1 rounded-lg bg-white border border-slate-200 shadow-xs">🌱 Misiones</button>
+      <button onclick="app.navigate('examen')" class="whitespace-nowrap px-3 py-1 rounded-lg bg-white border border-slate-200 shadow-xs">🏆 Examen</button>
+      <button onclick="app.navigate('express')" class="whitespace-nowrap px-3 py-1 rounded-lg bg-white border border-slate-200 shadow-xs">⚡ Express</button>
+      <button onclick="app.navigate('arcade')" class="whitespace-nowrap px-3 py-1 rounded-lg bg-white border border-slate-200 shadow-xs">🕹️ Arcade</button>
+      <button onclick="app.navigate('laboratorio')" class="whitespace-nowrap px-3 py-1 rounded-lg bg-white border border-slate-200 shadow-xs">🔬 Explorador</button>
+      <button onclick="app.navigate('chuleta')" class="whitespace-nowrap px-3 py-1 rounded-lg bg-white border border-slate-200 shadow-xs">📖 Chuleta</button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       CONTENEDOR DINÁMICO DE VISTAS (SPA)
+       ========================================================================= -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-6">
+
+    <!-- ---------------------------------------------------------------------
+         VISTA 1: INICIO (HOME)
+         --------------------------------------------------------------------- -->
+    <section id="view-home" class="space-y-8">
+      
+      <!-- Banner de Bienvenida -->
+      <div class="card-playful p-6 sm:p-8 bg-gradient-to-r from-emerald-600 via-teal-600 to-green-700 text-white relative overflow-hidden">
+        <div class="relative z-10 max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-xs text-xs font-black uppercase tracking-wider mb-3">
+            <span>🌻 Ciencias de la Naturaleza 4.º Primaria</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-black font-display tracking-tight mb-2">
+            ¡Hola, <span id="home-student-name">Olivia</span>! 👋🌿
+          </h2>
+          <p class="text-emerald-100 text-base sm:text-lg mb-6 leading-relaxed font-medium">
+            Bienvenida a tu entrenador de <strong>Science · Tema 2: «La vida de las plantas»</strong>. Aprende jugando cómo respiran las hojas, las partes de la flor, el viaje de las savias y saca un 10 en tu control de Santillana.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <button onclick="app.navigate('misiones')" class="btn-bouncy px-5 py-3 rounded-xl bg-white text-emerald-800 hover:bg-emerald-50 font-black text-sm flex items-center gap-2 shadow-lg">
+              <span>🚀 Empezar Misiones</span>
+            </button>
+            <button onclick="app.navigate('examen')" class="btn-bouncy px-5 py-3 rounded-xl bg-emerald-800/80 hover:bg-emerald-900 text-white border border-white/20 font-black text-sm flex items-center gap-2">
+              <span>🏆 Ir al Examen Oficial</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Decoración Floral SVG -->
+        <div class="absolute right-[-20px] bottom-[-20px] text-white/10 pointer-events-none select-none text-9xl">
+          🌸
+        </div>
+      </div>
+
+      <!-- Tarjetas de Estadísticas y Progreso -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        
+        <div class="card-playful p-5 flex items-center gap-4 bg-white border-2 border-slate-100">
+          <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl shrink-0">
+            ⭐
+          </div>
+          <div>
+            <div class="text-2xl font-black text-slate-900" id="home-star-count">0</div>
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wide">Estrellas</div>
+          </div>
+        </div>
+
+        <div class="card-playful p-5 flex items-center gap-4 bg-white border-2 border-slate-100">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl shrink-0">
+            🌱
+          </div>
+          <div>
+            <div class="text-2xl font-black text-slate-900" id="home-completed-missions">0 de 5</div>
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wide">Misiones</div>
+          </div>
+        </div>
+
+        <div class="card-playful p-5 flex items-center gap-4 bg-white border-2 border-slate-100">
+          <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center text-2xl shrink-0">
+            📊
+          </div>
+          <div>
+            <div class="text-2xl font-black text-slate-900" id="home-progress-pct">0%</div>
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wide">Progreso</div>
+          </div>
+        </div>
+
+        <div class="card-playful p-5 flex items-center gap-4 bg-white border-2 border-slate-100">
+          <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-2xl shrink-0">
+            🏆
+          </div>
+          <div>
+            <div class="text-2xl font-black text-slate-900" id="home-last-score">Pendiente</div>
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wide">Último Control</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Barra de progreso general -->
+      <div class="card-playful p-4 bg-white border border-slate-200">
+        <div class="flex justify-between items-center text-xs font-bold text-slate-600 mb-1.5">
+          <span>Camino hacia el Diploma Oficial de Botánica</span>
+          <span class="text-emerald-600 font-black">5 Misiones + Examen</span>
+        </div>
+        <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden p-0.5">
+          <div id="home-progress-bar" class="bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Accesos Rápidos Modulares -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Misiones -->
+        <div onclick="app.navigate('misiones')" class="card-playful p-6 cursor-pointer hover:border-emerald-400 bg-white group">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            🎒
+          </div>
+          <h3 class="text-xl font-black text-slate-900 mb-2">Misiones por Temas</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            5 entrenamientos guiados con retroalimentación inmediata: anatomía, fotosíntesis, flores, clasificación y frutos.
+          </p>
+        </div>
+
+        <!-- Examen Oficial -->
+        <div onclick="app.navigate('examen')" class="card-playful p-6 cursor-pointer hover:border-teal-400 bg-white group">
+          <div class="w-12 h-12 rounded-2xl bg-teal-100 text-teal-700 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            📝
+          </div>
+          <h3 class="text-xl font-black text-slate-900 mb-2">Simulador Oficial Santillana</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Prueba A (Caso práctico en la Sierra) y Prueba B (Conceptos clave) para evaluar tu nivel y ganar el diploma.
+          </p>
+        </div>
+
+        <!-- Arcade y Laboratorio -->
+        <div onclick="app.navigate('arcade')" class="card-playful p-6 cursor-pointer hover:border-pink-400 bg-white group">
+          <div class="w-12 h-12 rounded-2xl bg-pink-100 text-pink-700 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            🕹️
+          </div>
+          <h3 class="text-xl font-black text-slate-900 mb-2">Arcade y Explorador</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Clasifica a toda velocidad plantas, frutos y tallos, o toca las partes interactivas de la flor y de la planta.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ---------------------------------------------------------------------
+         VISTA 2: LISTA DE MISIONES
+         --------------------------------------------------------------------- -->
+    <section id="view-misiones" class="space-y-6 hidden">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900">🌱 Misiones de Aprendizaje Botánico</h2>
+          <p class="text-sm text-slate-600 font-medium">Entrenamiento paso a paso para dominar cada concepto del tema.</p>
+        </div>
+      </div>
+
+      <div id="missions-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Renderizado dinámicamente desde app.js -->
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------------------
+         VISTA 3: DETALLE DE MISIÓN (PREGUNTAS PASO A PASO)
+         --------------------------------------------------------------------- -->
+    <section id="view-mision-detail" class="max-w-3xl mx-auto space-y-6 hidden">
+      
+      <div class="flex items-center justify-between">
+        <button onclick="app.navigate('misiones')" class="btn-bouncy px-3 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-black text-slate-600 hover:bg-slate-50 flex items-center gap-1">
+          ⬅️ Volver a Misiones
+        </button>
+        <span id="mission-progress-text" class="text-xs font-black text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full">
+          Pregunta 1 de 6
+        </span>
+      </div>
+
+      <!-- Barra de progreso de la misión -->
+      <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+        <div id="mission-progress-bar" class="bg-emerald-600 h-full rounded-full transition-all duration-300" style="width: 16%"></div>
+      </div>
+
+      <!-- Tarjeta Principal de la Pregunta -->
+      <div class="card-playful p-6 sm:p-8 bg-white border-2 border-slate-200">
+        <h3 id="mission-title" class="text-sm font-black text-emerald-700 uppercase tracking-wider mb-2">Misión</h3>
+        <h2 id="mission-question-text" class="text-xl sm:text-2xl font-black text-slate-900 leading-snug mb-6">
+          Pregunta interactiva
+        </h2>
+
+        <!-- Contenedor de opciones -->
+        <div id="mission-options-container" class="space-y-3">
+          <!-- Botones de opciones inyectados por app.js -->
+        </div>
+
+        <!-- Caja de retroalimentación pedagógica -->
+        <div id="mission-feedback-box" class="hidden mt-6 p-5 rounded-2xl border-2">
+          <h4 id="mission-feedback-title" class="text-base font-black mb-1">Feedback</h4>
+          <p id="mission-feedback-text" class="text-sm leading-relaxed mb-4">Explicación</p>
+          <button id="mission-next-btn" onclick="app.nextMissionQuestion()" class="btn-bouncy w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-sm shadow-md">
+            Siguiente Pregunta ➡️
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ---------------------------------------------------------------------
+         VISTA 4: SELECTOR DE EXAMEN OFICIAL
+         --------------------------------------------------------------------- -->
+    <section id="view-examen" class="space-y-6 hidden">
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <div class="w-16 h-16 rounded-3xl bg-emerald-100 text-emerald-700 text-3xl flex items-center justify-center mx-auto mb-3 shadow-sm">
+          🏆
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mb-2">Simulador de Control Oficial Santillana</h2>
+        <p class="text-sm text-slate-600 font-medium">
+          Elige una de las dos modalidades oficiales de evaluación de 4.º de Primaria para ponerte a prueba y conseguir tu diploma.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        
+        <!-- Tarjeta Prueba A -->
+        <div class="card-playful p-6 sm:p-8 flex flex-col justify-between bg-white border-2 border-emerald-200 hover:border-emerald-500 transition-all">
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <span class="text-4xl">🌲</span>
+              <span class="bg-emerald-100 text-emerald-800 text-xs px-3 py-1 rounded-full font-black">Caso Práctico</span>
+            </div>
+            <h3 class="text-xl font-black text-slate-900 mb-1">Prueba A: Expedición en la Sierra</h3>
+            <p class="text-xs text-emerald-700 font-bold mb-3">10 preguntas competenciales contextualizadas</p>
+            <p class="text-sm text-slate-600 leading-relaxed mb-6">
+              Acompaña a Olivia en su cuaderno de campo: identifica los árboles del bosque, el césped, las partes de las flores de jara, musgos en rocas húmedas y el valor ecológico de las plantas.
+            </p>
+          </div>
+          <button onclick="app.startExam('A')" class="btn-bouncy w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-sm flex items-center justify-center gap-2 shadow-md">
+            <span>🚀 Comenzar Prueba A</span>
+          </button>
+        </div>
+
+        <!-- Tarjeta Prueba B -->
+        <div class="card-playful p-6 sm:p-8 flex flex-col justify-between bg-white border-2 border-teal-200 hover:border-teal-500 transition-all">
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <span class="text-4xl">🔬</span>
+              <span class="bg-teal-100 text-teal-800 text-xs px-3 py-1 rounded-full font-black">Rigor Conceptual</span>
+            </div>
+            <h3 class="text-xl font-black text-slate-900 mb-1">Prueba B: Saberes y Conceptos Clave</h3>
+            <p class="text-xs text-teal-700 font-bold mb-3">10 preguntas de definiciones y procesos</p>
+            <p class="text-sm text-slate-600 leading-relaxed mb-6">
+              Domina la anatomía vegetal, las fases exactas de la fotosíntesis, el cáliz, corola, estambres y pistilo, gimnospermas vs angiospermas y los tipos de frutos.
+            </p>
+          </div>
+          <button onclick="app.startExam('B')" class="btn-bouncy w-full py-3 px-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-black text-sm flex items-center justify-center gap-2 shadow-md">
+            <span>🚀 Comenzar Prueba B</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------------------
+         VISTA 5: EXAMEN EN CURSO / RESULTADOS
+         --------------------------------------------------------------------- -->
+    <section id="view-examen-running" class="max-w-3xl mx-auto space-y-6 hidden">
+      
+      <!-- Contenedor del examen en marcha -->
+      <div id="exam-running-box" class="space-y-6">
+        <div class="flex items-center justify-between">
+          <button onclick="app.navigate('examen')" class="btn-bouncy px-3 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-black text-slate-600 hover:bg-slate-50 flex items-center gap-1">
+            ⬅️ Salir del Examen
+          </button>
+          <span id="exam-q-number" class="text-xs font-black text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full">
+            Pregunta 1 de 10
+          </span>
+        </div>
+
+        <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+          <div id="exam-q-progress" class="bg-emerald-600 h-full rounded-full transition-all duration-300" style="width: 10%"></div>
+        </div>
+
+        <!-- Título del examen -->
+        <div>
+          <h2 id="exam-active-title" class="text-xl sm:text-2xl font-black text-slate-900">Prueba Oficial</h2>
+          <p id="exam-active-subtitle" class="text-xs text-emerald-700 font-bold">10 preguntas</p>
+        </div>
+
+        <!-- Introducción al caso práctico si aplica -->
+        <div class="hidden p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+          <span class="font-black text-emerald-800">📖 Contexto:</span>
+          <span id="exam-active-intro"></span>
+        </div>
+
+        <!-- Tarjeta de la Pregunta -->
+        <div class="card-playful p-6 sm:p-8 bg-white border-2 border-slate-200">
+          <h3 id="exam-q-text" class="text-lg sm:text-xl font-black text-slate-900 leading-snug mb-4">
+            Texto de la pregunta
+          </h3>
+
+          <div id="exam-q-hint-container" class="hidden mb-4 p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-center gap-2">
+            <span>💡 Pista:</span>
+            <span id="exam-q-hint-text"></span>
+          </div>
+
+          <!-- Opciones -->
+          <div id="exam-options-container" class="space-y-3 mb-6">
+            <!-- Opciones inyectadas -->
+          </div>
+
+          <!-- Botones de navegación -->
+          <div class="flex items-center justify-between gap-4 pt-4 border-t border-slate-100">
+            <button id="exam-prev-btn" onclick="app.prevExamQuestion()" class="btn-bouncy px-4 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-black text-sm">
+              ⬅️ Anterior
+            </button>
+            <button id="exam-next-btn" onclick="app.nextExamQuestion()" class="btn-bouncy px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-sm shadow-md">
+              Siguiente ➡️
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contenedor de Resultados (se muestra al finalizar) -->
+      <div id="exam-results-container" class="hidden space-y-6">
+        <!-- Inyectado por app.js -->
+      </div>
+
+    </section>
+
+    <!-- ---------------------------------------------------------------------
+         VISTA 6: DESAFÍO EXPRESS (ENTRENAMIENTO ALEATORIO INFINITO)
+         --------------------------------------------------------------------- -->
+    <section id="view-express" class="max-w-2xl mx-auto space-y-6 hidden">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-2xl font-black text-slate-900 flex items-center gap-2">
+            <span>⚡ Desafío Express</span>
+          </h2>
+          <p class="text-xs text-slate-500 font-semibold">10 preguntas aleatorias de entrenamiento continuo</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="bg-amber-100 text-amber-800 text-xs px-3 py-1 rounded-full font-black flex items-center gap-1">
+            🔥 Racha: <span id="express-streak">0</span>
+          </span>
+          <span id="express-counter" class="text-xs font-black text-slate-700 bg-slate-100 px-3 py-1 rounded-full">
+            Pregunta 1 de 10
+          </span>
+        </div>
+      </div>
+
+      <div class="card-playful p-6 sm:p-8 bg-white border-2 border-slate-200">
+        <h3 id="express-question-text" class="text-lg sm:text-xl font-black text-slate-900 mb-6 leading-snug">
+          Pregunta Express
+        </h3>
+
+        <div id="express-options-container" class="space-y-3">
+          <!-- Opciones Express -->
+        </div>
+
+        <div id="express-feedback-box" class="hidden mt-6 p-4 rounded-xl border-2">
+          <h4 id="express-feedback-title" class="text-sm font-black mb-1">Feedback</h4>
+          <p id="express-feedback-text" class="text-xs leading-relaxed mb-4">Explicación</p>
+          <button id="express-next-btn" onclick="app.nextExpress()" class="btn-bouncy w-full py-2.5 rounded-xl bg-emerald-600 text-white font-black text-sm">
+            Siguiente Desafío ⚡
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------------------
+         VISTA 7: ARCADE BOTÁNICO
+         --------------------------------------------------------------------- -->
+    <section id="view-arcade" class="space-y-6 hidden">
+      <div class="text-center max-w-xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mb-1">🕹️ Clasificador Botánico Express</h2>
+        <p class="text-sm text-slate-600 font-medium">Clasifica a toda velocidad y acumula puntos y rachas botánicas.</p>
+      </div>
+
+      <!-- Pestañas de Modos de Juego -->
+      <div id="arcade-tabs">
+        <!-- Inyectado por app.js -->
+      </div>
+
+      <!-- Marcador de Puntos -->
+      <div class="flex justify-center gap-6 max-w-md mx-auto mb-2 text-sm font-black">
+        <div class="bg-white border border-slate-200 px-4 py-2 rounded-xl flex items-center gap-2 shadow-xs">
+          <span>🏆 Puntos:</span>
+          <span id="arcade-score-val" class="text-emerald-600 text-lg">0</span>
+        </div>
+        <div class="bg-white border border-slate-200 px-4 py-2 rounded-xl flex items-center gap-2 shadow-xs">
+          <span>🔥 Racha:</span>
+          <span id="arcade-streak-val" class="text-amber-600 text-lg">0</span>
+        </div>
+      </div>
+
+      <!-- Tarjeta del Elemento Actual -->
+      <div id="arcade-current-card" class="my-6">
+        <!-- Renderizado dinámicamente -->
+      </div>
+
+      <!-- Botones de Destino de Clasificación -->
+      <div id="arcade-targets-container">
+        <!-- Renderizado dinámicamente -->
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------------------
+         VISTA 8: LABORATORIO Y EXPLORADOR ANATÓMICO INTERACTIVO
+         --------------------------------------------------------------------- -->
+    <section id="view-laboratorio" class="space-y-8 hidden">
+      
+      <div class="text-center max-w-2xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mb-2">🔬 Explorador Anatómico Interactivo</h2>
+        <p class="text-sm text-slate-600 font-medium">Toca o haz clic sobre cada órgano de la planta y de la flor para descubrir sus secretos.</p>
+      </div>
+
+      <!-- Bloque 1: Anatomía de la Planta Completa -->
+      <div class="card-playful p-6 sm:p-8 bg-white border-2 border-slate-200">
+        <h3 class="text-xl font-black text-slate-900 mb-4 flex items-center gap-2">
+          <span>🌱</span>
+          <span>1. Órganos de la Planta Completa</span>
+        </h3>
+
+        <!-- Botones de Partes de la Planta -->
+        <div class="flex flex-wrap gap-2 mb-6">
+          <button id="btn-part-leaves" onclick="app.renderAnatomyCard('leaves')" class="plant-part-btn btn-bouncy px-4 py-2 rounded-xl border border-slate-200 font-bold text-xs">🍃 Hojas Verdes</button>
+          <button id="btn-part-flower" onclick="app.renderAnatomyCard('flower')" class="plant-part-btn btn-bouncy px-4 py-2 rounded-xl border border-slate-200 font-bold text-xs">🌸 Flor y Fruto</button>
+          <button id="btn-part-stem" onclick="app.renderAnatomyCard('stem')" class="plant-part-btn btn-bouncy px-4 py-2 rounded-xl border border-slate-200 font-bold text-xs">🪵 El Tallo</button>
+          <button id="btn-part-roots" onclick="app.renderAnatomyCard('roots')" class="plant-part-btn btn-bouncy px-4 py-2 rounded-xl border border-slate-200 font-bold text-xs">🌿 Las Raíces</button>
+        </div>
+
+        <!-- Tarjeta de Información Dinámica -->
+        <div id="anatomy-info-card">
+          <!-- Inyectado por app.js -->
+        </div>
+      </div>
+
+      <!-- Bloque 2: Las 4 Partes de la Flor -->
+      <div class="card-playful p-6 sm:p-8 bg-white border-2 border-pink-200">
+        <h3 class="text-xl font-black text-slate-900 mb-4 flex items-center gap-2">
+          <span>🌸</span>
+          <span>2. Las 4 Partes de una Flor Completa</span>
+        </h3>
+
+        <div class="flex flex-wrap gap-2 mb-6">
+          <button id="btn-flower-corolla" onclick="app.renderFlowerPart('corolla')" class="flower-part-btn btn-bouncy px-4 py-2 rounded-xl border border-slate-200 font-bold text-xs">🌺 Corola (Pétalos)</button>
+          <button id="btn-flower-calyx" onclick="app.renderFlowerPart('calyx')" class="flower-part-btn btn-bouncy px-4 py-2 rounded-xl border border-slate-200 font-bold text-xs">🍃 Cáliz (Sépalos)</button>
+          <button id="btn-flower-stamens" onclick="app.renderFlowerPart('stamens')" class="flower-part-btn btn-bouncy px-4 py-2 rounded-xl border border-slate-200 font-bold text-xs">🌾 Estambres (Polen / Órgano Masculino)</button>
+          <button id="btn-flower-pistil" onclick="app.renderFlowerPart('pistil')" class="flower-part-btn btn-bouncy px-4 py-2 rounded-xl border border-slate-200 font-bold text-xs">🏺 Pistilo (Ovario y Óvulos / Órgano Femenino)</button>
+        </div>
+
+        <div id="flower-info-card">
+          <!-- Inyectado por app.js -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ---------------------------------------------------------------------
+         VISTA 9: CHULETA VISUAL / GUÍA DE REPASO
+         --------------------------------------------------------------------- -->
+    <section id="view-chuleta" class="space-y-6 hidden">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900">📖 Guía Visual de Repaso</h2>
+          <p class="text-sm text-slate-600 font-medium">Los 5 bloques fundamentales del libro CLAVES Santillana para repasar antes del control.</p>
+        </div>
+        <button onclick="window.print()" class="no-print btn-bouncy px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-black text-xs flex items-center gap-2">
+          <span>🖨️ Imprimir Guía</span>
+        </button>
+      </div>
+
+      <div id="summary-guide-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Inyectado por app.js -->
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------------------
+         VISTA 10: DIPLOMA OFICIAL IMPRIMIBLE
+         --------------------------------------------------------------------- -->
+    <section id="view-diploma" class="max-w-3xl mx-auto space-y-6 hidden">
+      
+      <div class="no-print flex items-center justify-between">
+        <button onclick="app.navigate('home')" class="btn-bouncy px-3 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-black text-slate-600">
+          ⬅️ Volver al Inicio
+        </button>
+        <div class="flex gap-2">
+          <button onclick="app.editStudentName()" class="btn-bouncy px-3 py-1.5 rounded-xl border border-emerald-300 bg-emerald-50 text-emerald-800 text-xs font-black">
+            ✏️ Cambiar Nombre
+          </button>
+          <button onclick="app.printDiploma()" class="btn-bouncy px-4 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black shadow-md">
+            🖨️ Imprimir / Guardar PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- Hoja del Diploma (Apta para imprimir) -->
+      <div class="diploma-print-sheet card-playful p-8 sm:p-12 bg-gradient-to-br from-amber-50/60 via-white to-emerald-50/60 border-8 border-double border-emerald-700 text-center relative shadow-xl">
+        
+        <div class="text-5xl sm:text-6xl mb-2">🌿 🏆 🌸</div>
+        
+        <div class="uppercase tracking-widest text-xs font-black text-emerald-800 mb-2">
+          Colegio Oficial de Ciencias de la Naturaleza · 4.º Primaria
+        </div>
+
+        <h1 class="text-3xl sm:text-4xl font-black font-display text-slate-900 mb-3 tracking-tight">
+          DIPLOMA DE HONOR EN BOTÁNICA
+        </h1>
+
+        <p class="text-sm sm:text-base text-slate-600 font-medium mb-6">
+          Se otorga con el máximo reconocimiento a la alumna:
+        </p>
+
+        <!-- Nombre de Olivia -->
+        <div class="inline-block border-b-4 border-emerald-600 px-8 py-2 text-3xl sm:text-4xl font-black font-display text-emerald-950 mb-6">
+          <span id="diploma-student-name">Olivia</span>
+        </div>
+
+        <p class="text-sm sm:text-base text-slate-700 max-w-xl mx-auto leading-relaxed mb-6">
+          Por haber demostrado un conocimiento sobresaliente sobre <strong>La vida de las plantas</strong>, dominando la fotosíntesis, la anatomía de las flores, la clasificación vegetal y la protección de los ecosistemas.
+        </p>
+
+        <div class="flex flex-wrap items-center justify-center gap-6 mb-8 text-xs font-bold text-slate-600">
+          <span id="diploma-score-text" class="bg-amber-100 text-amber-900 px-4 py-1.5 rounded-full font-black text-sm border border-amber-300">
+            Calificación de Honor: 10 / 10
+          </span>
+          <span id="diploma-date-text" class="bg-slate-100 px-4 py-1.5 rounded-full font-bold border border-slate-200">
+            Fecha de expedición
+          </span>
+        </div>
+
+        <!-- Firmas y Sello -->
+        <div class="flex justify-around items-end pt-6 border-t border-slate-200 text-xs text-slate-500 font-semibold">
+          <div class="text-center">
+            <div class="w-32 border-b border-slate-400 mx-auto mb-1 font-serif text-slate-800 italic">Fran Guerrero</div>
+            <span>Profesor & Tutor</span>
+          </div>
+          
+          <div class="w-20 h-20 rounded-full border-4 border-emerald-700 bg-emerald-50 text-emerald-800 flex flex-col items-center justify-center font-black text-[9px] uppercase tracking-tighter shadow-inner">
+            <span>SELLO</span>
+            <span>OFICIAL</span>
+            <span>4.º PRIM</span>
+          </div>
+
+          <div class="text-center">
+            <div class="w-32 border-b border-slate-400 mx-auto mb-1 font-serif text-slate-800 italic">Santillana CLAVES</div>
+            <span>Proyecto Educativo</span>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       PIE DE PÁGINA (FOOTER)
+       ========================================================================= -->
+  <footer class="no-print mt-auto border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
+    <div class="max-w-6xl mx-auto px-4 space-y-2">
+      <p class="font-bold text-slate-700">
+        🔬 Entrenador de Science 4.º de Primaria · Tema 2: «La vida de las plantas»
+      </p>
+      <p>
+        Diseñado con ❤️ para Olivia · Basado en el libro oficial de Ciencias de la Naturaleza (Proyecto <em>CLAVES / Construyendo Mundos</em>, Grazalema-Santillana).
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scripts modulares -->
+  <script src="js/audio.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+/* =============================================================================
+   ESTILOS VISUALES · SCIENCE 4.º DE PRIMARIA · TEMA 2: LA VIDA DE LAS PLANTAS
+   Entrenador interactivo para Olivia · Proyecto CLAVES Santillana
+   ============================================================================= */
+
+:root {
+  --primary: #059669;        /* Verde esmeralda naturaleza */
+  --primary-dark: #047857;
+  --secondary: #0284c7;      /* Azul agua y cielo */
+  --accent: #d97706;         /* Ámbar tierra y sol */
+  --floral: #db2777;         /* Rosa floración */
+  --success: #10b981;        /* Verde acierto */
+  --danger: #ef4444;         /* Rojo corrección */
+  --text-main: #1e293b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Outfit', 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #1e293b;
+  background: #fdfcf7;
+  background: linear-gradient(135deg, #f0fdf4 0%, #f0fdfa 40%, #fefce8 100%);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tipografía */
+.font-display { font-family: 'Outfit', -apple-system, sans-serif; letter-spacing: -0.02em; }
+.font-sans { font-family: 'Nunito', -apple-system, sans-serif; }
+
+/* Contenedores y Tarjetas */
+.card-playful {
+  background: #ffffff;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 25px -5px rgba(5, 150, 105, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+  border: 2px solid #e2e8f0;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-playful:hover {
+  border-color: #cbd5e1;
+}
+
+/* Botones Bouncy Táctiles para Niños */
+.btn-bouncy {
+  position: relative;
+  transition: all 0.15s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  font-weight: 800;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.14);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+.btn-bouncy:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.14);
+}
+
+.btn-bouncy:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Chips y Píldoras Interactivas */
+.pill-option {
+  border: 2px solid #e2e8f0;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 0.85rem 1.2rem;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.pill-option:hover {
+  border-color: #6ee7b7;
+  background-color: #f0fdf4;
+  transform: translateY(-2px);
+}
+
+.pill-option.selected {
+  border-color: #059669;
+  background-color: #d1fae5;
+  color: #065f46;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.22);
+}
+
+.pill-option.correct {
+  border-color: #10b981 !important;
+  background-color: #dcfce7 !important;
+  color: #166534 !important;
+}
+
+.pill-option.incorrect {
+  border-color: #ef4444 !important;
+  background-color: #fee2e2 !important;
+  color: #991b1b !important;
+}
+
+/* Miniaturas de clasificación Drag & Drop / Arcade */
+.drop-zone {
+  min-height: 140px;
+  border: 2px dashed #94a3b8;
+  border-radius: 1.25rem;
+  transition: all 0.2s ease;
+  background-color: #f8fafc;
+}
+
+.drop-zone.drag-over {
+  border-color: #059669;
+  background-color: #ecfdf5;
+  box-shadow: inset 0 0 15px rgba(5, 150, 105, 0.1);
+}
+
+/* Gráfico Botánico Interactivo SVG */
+.botanical-part {
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.botanical-part:hover {
+  filter: drop-shadow(0 0 8px rgba(5, 150, 105, 0.6));
+  transform: scale(1.02);
+}
+
+.botanical-part.active {
+  stroke: #d97706 !important;
+  stroke-width: 3px !important;
+  filter: drop-shadow(0 0 12px rgba(217, 119, 6, 0.7));
+}
+
+/* Animaciones */
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.9; }
+}
+
+.pulse-glow {
+  animation: pulseGlow 2s infinite ease-in-out;
+}
+
+@keyframes floatBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.float-bounce {
+  animation: floatBounce 3s infinite ease-in-out;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* =============================================================================
+   ESTILOS DE IMPRESIÓN (DIPLOMA Y GUÍA DE REPASO)
+   ============================================================================= */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .diploma-print-sheet {
+    page-break-inside: avoid;
+    border: 8px double #059669 !important;
+    box-shadow: none !important;
+  }
+}

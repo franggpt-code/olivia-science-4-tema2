@@ -1,0 +1,28 @@
+{
+  "name": "olivia-science-4-tema2",
+  "version": "1.0.0",
+  "description": "Aplicación web interactiva y pedagógica para preparar el examen del Tema 2 de Science / Conocimiento del Medio (La vida de las plantas) de 4.º de Primaria (Proyecto CLAVES / Grazalema-Santillana)",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 3000"
+  },
+  "keywords": [
+    "science",
+    "ciencias-naturales",
+    "conocimiento-del-medio",
+    "primaria",
+    "4-primaria",
+    "las-plantas",
+    "la-vida-de-las-plantas",
+    "fotosintesis",
+    "flores",
+    "angiospermas",
+    "gimnospermas",
+    "musgos",
+    "helechos",
+    "santillana",
+    "claves"
+  ],
+  "author": "Fran Guerrero",
+  "license": "MIT"
+}
