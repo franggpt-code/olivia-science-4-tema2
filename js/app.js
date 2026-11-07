@@ -494,7 +494,7 @@ class ScienceApp {
                   </div>
                   <p class="text-xs text-slate-600 mb-1"><strong>Tu respuesta:</strong> ${userAns !== undefined ? q.options[userAns] : '<em>No respondida</em>'}</p>
                   ${!isCorrect ? `<p class="text-xs text-emerald-700 font-bold mb-1"><strong>Respuesta correcta:</strong> ${q.options[q.correct]}</p>` : ''}
-                  <p class="text-xs text-slate-500 mt-2 bg-white/80 p-2.5 rounded-lg border border-slate-200"><strong>Explicación:</strong> ${q.explanation}</p>
+                  <p class="text-xs text-slate-500 mt-2 bg-white p-2.5 rounded-lg border border-slate-200"><strong>Explicación:</strong> ${q.explanation}</p>
                 </div>
               `;
             }).join("")}
@@ -798,7 +798,7 @@ class ScienceApp {
             <span class="bg-emerald-200 text-emerald-900 text-xs px-2.5 py-1 rounded-full font-black">${part.role}</span>
           </div>
           <p class="text-sm text-slate-700 leading-relaxed mb-4">${part.details}</p>
-          <div class="p-3 bg-white/80 rounded-xl border border-emerald-200 flex items-start gap-2 text-xs text-emerald-900">
+          <div class="p-3 bg-white rounded-xl border border-emerald-200 flex items-start gap-2 text-xs text-emerald-900">
             <span class="text-base shrink-0">💡</span>
             <div><strong>Dato Curioso:</strong> ${part.curiosity}</div>
           </div>
