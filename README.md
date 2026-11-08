@@ -13,7 +13,7 @@ Aplicación web interactiva, pedagógica y lúdica diseñada especialmente para 
    - **Misión 4: Clasificación del Reino Vegetal:** plantas sin semillas (musgos y helechos con esporas) vs. plantas con semillas (gimnospermas con piñas y acículas vs. angiospermas con flores y frutos).
    - **Misión 5: Frutos, Ecosistemas y Utilidades:** frutos carnosos vs. secos, dispersión de semillas, oxígeno, madera, papel, algodón, medicinas y prevención de la erosión del suelo.
 
-2. **🏆 Simulador de Examen Oficial Santillana:**
+2. **🏆 Simulador de Examen:**
    - **Prueba A: La Gran Expedición Botánica en la Sierra:** 10 preguntas competenciales aplicadas a una excursión en la naturaleza, examinando especies reales, frutos y ecosistemas.
    - **Prueba B: Dominio de Conceptos y Saberes Clave:** 10 preguntas de máximo rigor conceptual sobre definiciones formales y fases de la nutrición y reproducción vegetal.
    - Desglose formativo de respuestas con explicaciones pedagógicas adaptadas a 9-10 años.
