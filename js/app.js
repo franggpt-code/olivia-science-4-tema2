@@ -458,7 +458,7 @@ class ScienceApp {
       let message = "¡Matrícula de Honor! ¡Eres una auténtica científica botánica!";
       if (score < 5) {
         badgeColor = "bg-rose-100 text-rose-800 border-rose-300";
-        message = "¡Buen intento! Repasa las misiones y la chuleta botánica y repite para subir nota.";
+        message = "¡Buen intento! Repasa las misiones y los esquemas botánicos y repite para subir nota.";
       } else if (score < 7) {
         badgeColor = "bg-amber-100 text-amber-800 border-amber-300";
         message = "¡Bien hecho, Olivia! Tienes los conceptos básicos, pero puedes aspirar al sobresaliente.";
@@ -840,7 +840,7 @@ class ScienceApp {
   }
 
   // ---------------------------------------------------------------------------
-  // VISTA 7: CHULETA / GUÍA VISUAL RESUMIDA
+  // VISTA 7: ESQUEMAS / GUÍA VISUAL RESUMIDA
   // ---------------------------------------------------------------------------
   renderSummaryGuide() {
     const container = document.getElementById("summary-guide-container");

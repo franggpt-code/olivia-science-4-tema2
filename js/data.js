@@ -942,7 +942,7 @@ const SCIENCE_DATA = {
   },
 
   // ---------------------------------------------------------------------------
-  // GUÍA VISUAL RESUMIDA (CHULETA PARA REPASAR ANTES DEL EXAMEN)
+  // GUÍA VISUAL RESUMIDA (ESQUEMAS PARA REPASAR ANTES DEL EXAMEN)
   // ---------------------------------------------------------------------------
   summaryGuide: [
     {

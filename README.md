@@ -30,7 +30,7 @@ Aplicación web interactiva, pedagógica y lúdica diseñada especialmente para 
 5. **🔬 Explorador Anatómico Interactivo:**
    - Panel visual donde Olivia puede tocar las partes de la planta (Raíz, Tallo, Hojas, Flor/Fruto) y de la flor (Cáliz, Corola, Estambres, Pistilo) para descubrir sus secretos, funciones biológicas y curiosidades.
 
-6. **📖 Guía Visual de Repaso (Chuleta Imprimible):**
+6. **📖 Guía Visual de Repaso (Esquemas Imprimibles):**
    - Resumen estructurado en 5 bloques esenciales con formato de lectura rápida y diseño optimizado para imprimir antes del examen.
 
 7. **🎓 Diploma Oficial Imprimible de Olivia:**
@@ -83,7 +83,7 @@ La aplicación está preparada con `vercel.json` para desplegarse automáticamen
 ├── js/
 │   ├── confetti.min.js                  # Motor de partículas de celebración
 │   ├── audio.js                         # Web Audio API y síntesis de voz (Text-to-Speech)
-│   ├── data.js                          # Banco pedagógico (Misiones, Exámenes A/B, Express y Chuleta)
+│   ├── data.js                          # Banco pedagógico (Misiones, Exámenes A/B, Express y Esquemas)
 │   └── app.js                           # Lógica de la SPA, navegación, puntuación y diploma
 ├── Science_4_Tema2_Claves_Santillana.md # Resumen curricular y base conceptual
 ├── vercel.json                          # Configuración de despliegue y seguridad
