@@ -96,23 +96,24 @@
     <section id="view-home" class="space-y-8">
       
       <!-- Banner de Bienvenida -->
-      <div class="card-playful p-6 sm:p-8 bg-gradient-to-r from-emerald-600 via-teal-600 to-green-700 text-white relative overflow-hidden">
+      <div class="hero-banner p-6 sm:p-8 relative overflow-hidden">
         <div class="relative z-10 max-w-2xl">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-xs text-xs font-black uppercase tracking-wider mb-3">
-            <span>🌻 Ciencias de la Naturaleza 4.º Primaria</span>
+          <div class="hero-badge mb-3">
+            <span>🌻</span>
+            <span>Ciencias de la Naturaleza 4.º Primaria · Tema 2</span>
           </div>
-          <h2 class="text-3xl sm:text-4xl font-black font-display tracking-tight mb-2">
+          <h2 class="text-3xl sm:text-4xl font-black font-display tracking-tight mb-2 text-white">
             ¡Hola, <span id="home-student-name">Olivia</span>! 👋🌿
           </h2>
-          <p class="text-emerald-100 text-base sm:text-lg mb-6 leading-relaxed font-medium">
+          <p class="hero-p mb-6">
             Bienvenida a tu entrenador de <strong>Science · Tema 2: «La vida de las plantas»</strong>. Aprende jugando cómo respiran las hojas, las partes de la flor, el viaje de las savias y saca un 10 en tu control de Santillana.
           </p>
           <div class="flex flex-wrap gap-3">
-            <button onclick="app.navigate('misiones')" class="btn-bouncy px-5 py-3 rounded-xl bg-white text-emerald-800 hover:bg-emerald-50 font-black text-sm flex items-center gap-2 shadow-lg">
-              <span>🚀 Empezar Misiones</span>
+            <button onclick="app.navigate('misiones')" class="btn-bounce hero-btn-primary px-6 py-3 rounded-2xl text-sm">
+              <span>Empezar Misiones</span> <span>🚀</span>
             </button>
-            <button onclick="app.navigate('examen')" class="btn-bouncy px-5 py-3 rounded-xl bg-emerald-800/80 hover:bg-emerald-900 text-white border border-white/20 font-black text-sm flex items-center gap-2">
-              <span>🏆 Ir al Examen Oficial</span>
+            <button onclick="app.navigate('examen')" class="btn-bounce hero-btn-secondary px-6 py-3 rounded-2xl text-sm">
+              <span>Simulador de Examen</span> <span>🏆</span>
             </button>
           </div>
         </div>
